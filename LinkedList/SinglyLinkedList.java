@@ -1,6 +1,6 @@
 class Node{
     int data;
-    Node next;
+    Node next;//next holds address of next node, type node class
     Node(int data)
     {
         this.data = data;
@@ -8,13 +8,14 @@ class Node{
 }
 
 class SinglyLinkedList{
-    static Node head;
-    static Node tail;
+    static Node head;//refering to first node
+    static Node tail;//refering to last node// initially both are null
 
+    //adding node to the last
     public static void addLast(int data)
     {
         Node nn = new Node(data);
-        if(head==null)
+        if(head==null) //checking for zero size where both head and tail are null
         {
             head=nn;
             tail=nn;
@@ -25,6 +26,8 @@ class SinglyLinkedList{
             tail=nn;
         }
     }
+
+    //adding node to first
     public static void addFirst(int data)
     {
         Node nn = new Node(data);
