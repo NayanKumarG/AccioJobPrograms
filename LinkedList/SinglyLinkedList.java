@@ -42,13 +42,136 @@ class SinglyLinkedList{
             head=nn;
         } 
     }
+
+    //display linked list 
+    public static void display()
+    {
+        if(head==null)
+        {
+            System.out.println("No nodes found:");
+        }
+        else{
+            Node cur = head;
+            while(cur!=null)
+            {
+                System.out.print(cur.data+" ");
+                if(cur.next!=null)
+                {
+                System.out.print("--> ");
+                }
+                cur=cur.next;
+            }
+            System.out.println();
+        }
+    }
+
+    //remove node from first
+    public static void removeFirst()
+    {
+        if(head==null)
+        {
+            System.out.println("No nodes to remove:");
+        }
+        else if(head==tail)
+        {
+            head=null;
+            tail=null;
+        }
+        else
+        {
+            head=head.next;
+        }
+    }
+
+    //get the node given index
+    public static Node getAt(int idx)
+    {
+       if(idx<0)
+       {
+        System.out.println("Index is out of bound:");
+        return null;
+       }
+       Node cur = head;
+       for(int i=0 ; i<idx ; i++)
+       {
+        if(cur==null)
+        {
+            System.out.println("Index out of bound:");
+            return null;
+        }
+        cur = cur.next;
+       }
+       return cur; 
+    }
+
+    //add the node at given index
+    public static void addAt(int idx , int data)
+    {
+        if(idx==0)
+        {
+            addFirst(data);
+            return;
+        }
+        Node nn = new Node(data);
+        Node cur = getAt(idx-1);
+        if(cur==null)
+        {
+            System.out.println("Index out of bound:");
+            return;
+        }
+        Node nextCur = cur.next;
+        cur.next=nn;
+        nn.next=nextCur;
+    }
+
+    //remove last node
+    public static Node removeLast()
+    {
+        if(head==null)
+        {
+            return null;
+        }
+        else if(head==tail)
+        {
+            Node tr = tail;
+            removeFirst();
+            return tr;
+        }
+        else{
+            Node cur = head;
+            while(cur.next!=tail)
+            {
+                cur = cur.next;
+            }
+            
+            cur.next=null;
+            Node tr = tail;
+            tail=cur;
+            return tr;
+        }
+    }
     public static void main(String []args)
     {
         for(int i=1 ; i<=5 ; i++)
         {
-            addFirst(i);
+            addLast(i);
         }
-        System.out.println(head.data);
-        System.out.println(tail.data);
+        display();
+
+        // removeFirst();
+        // display();
+
+        // Node ans = getAt(3);
+        // if(ans!=null)
+        // System.out.println(ans.data);
+
+        // addAt(5 , 10);
+        // display();
+        Node ans = removeLast();
+        System.out.println(ans.data);
+
     }
+
+
+
 }
